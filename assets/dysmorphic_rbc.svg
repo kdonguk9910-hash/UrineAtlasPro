@@ -1,0 +1,33 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background: Dark Phase Contrast Look -->
+  <rect width="400" height="400" fill="#1a1a1a" />
+  
+  <!-- Cell 1: Classic Acanthocyte (Mickey Mouse) -->
+  <g transform="translate(150, 150)">
+    <!-- Main Ring Body -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#e0e0e0" stroke-width="3" opacity="0.9" />
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#000" stroke-width="1" opacity="0.5" />
+    
+    <!-- Blebs (Ears) -->
+    <circle cx="-30" cy="-30" r="12" fill="#e0e0e0" opacity="0.8" />
+    <circle cx="30" cy="-30" r="12" fill="#e0e0e0" opacity="0.8" />
+  </g>
+
+  <!-- Cell 2: Ring form with bleb -->
+  <g transform="translate(280, 250)">
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#e0e0e0" stroke-width="3" opacity="0.8" />
+    <circle cx="25" cy="25" r="10" fill="#e0e0e0" opacity="0.7" />
+  </g>
+  
+  <!-- Cell 3: Irregular dysmorphic -->
+  <g transform="translate(100, 300)">
+    <path d="M0,-30 C20,-30 30,-10 30,10 C30,30 10,40 -10,30 C-30,20 -40,0 -30,-20 Z" 
+          fill="none" stroke="#e0e0e0" stroke-width="3" opacity="0.7" />
+    <circle cx="20" cy="-20" r="8" fill="#e0e0e0" opacity="0.6" />
+  </g>
+
+  <!-- Noise/Debris for realism -->
+  <circle cx="50" cy="50" r="2" fill="#555" opacity="0.5" />
+  <circle cx="350" cy="350" r="3" fill="#555" opacity="0.5" />
+  <circle cx="200" cy="50" r="1" fill="#555" opacity="0.5" />
+</svg>

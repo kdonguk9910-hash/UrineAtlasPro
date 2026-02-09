@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>UrineAtlas Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="UrineAtlas">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--primary); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; transition: opacity 0.5s ease-out;">
+        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">UrineAtlas</div>
+        <div class="loader"
+            style="width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite;">
+        </div>
+        <style>
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </div>
+
+    <header>
+        <div class="brand">UrineAtlas <span>Pro</span></div>
+        <div class="header-actions">
+            <!-- Icon for offline status or settings could go here -->
+        </div>
+    </header>
+
+    <main>
+        <!-- Search -->
+        <div class="search-bar-container">
+            <div class="search-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="global-search" class="search-input" placeholder="결정, 원주, 세포 검색..."
+                    autocomplete="off">
+                <div id="search-suggestions" class="search-suggestions hidden"></div>
+            </div>
+        </div>
+
+        <!-- Filters (Contextual based on Active Tab) -->
+        <div id="filter-container" class="filters">
+            <button class="filter-chip active" data-filter="all">전체</button>
+            <!-- pH filters will only show when 'Crystals' tab is active -->
+            <button class="filter-chip crystal-filter" data-filter="acidic">산성뇨</button>
+            <button class="filter-chip crystal-filter" data-filter="alkaline">알칼리뇨</button>
+        </div>
+
+        <!-- Content Grid -->
+        <div id="content-grid" class="content-grid">
+            <!-- Cards will be dynamically injected or hardcoded here -->
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" data-tab="crystals">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2)"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span>요 결정</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="casts">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="10" rx="2" ry="2"></rect>
+                <line x1="12" y1="2" x2="12" y2="22"></line>
+            </svg>
+            <span>원주</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="cells">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>세포 및 기타</span>
+        </a>
+    </nav>
+
+    <!-- Detail Modal (Full Page Slide up) -->
+    <div id="detail-modal" class="detail-modal">
+        <div class="modal-header">
+            <button id="close-modal" class="back-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div id="modal-header-title" style="font-weight:700;">상세 정보</div>
+        </div>
+        <div class="modal-body">
+            <img id="modal-image" src="" alt="" class="modal-hero-image">
+            <div class="modal-content-inner">
+                <div id="modal-tag" class="modal-tag">PH: ACIDIC</div>
+                <h1 id="modal-title" class="modal-title">요산염 (Urate)</h1>
+                <div id="modal-subtitle" style="color:var(--text-muted); margin-bottom: 2rem;">Erythrocytes</div>
+
+                <div class="modal-section">
+                    <div class="modal-section-title">특징 및 형태</div>
+                    <p id="modal-description">다양한 크기와 모양(통, 장미, 마름모 등)을 보이며 주로 호박색을 띱니다. 알칼리성 소변에서는 용해됩니다.</p>
+                </div>
+
+                <div id="clinical-box" class="clinical-box">
+                    <div class="clinical-box-title">임상적 의의</div>
+                    <p id="modal-clinical">요산 결석증, 급성 요산 신병증을 시사하나 정상인에서도 관찰될 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
